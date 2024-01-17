@@ -49,9 +49,9 @@ export class RolesController {
     }
 
     @ApiOperation({ summary: "Удаление роли" })
-    @ApiResponse({ status: 200, description: `Пользователь успешно удалён` })
+    @ApiResponse({ status: 200, description: `Роль успешно удалёна` })
     @Delete("/:id")
-    deleteUser(@Param("id") userId: number) {
-        return this.roleService.deleteRole(userId);
+    deleteRole(@Param("id") roleId: number) {
+        return this.roleService.deleteRole(roleId);
     }
 }

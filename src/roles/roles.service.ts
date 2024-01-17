@@ -50,11 +50,11 @@ export class RolesService {
         });
         if (!candidate) {
           throw new HttpException(
-            "Такого пользователя не существует",
+            "Такой роли не существует",
             HttpStatus.BAD_REQUEST
           );
         }
         await this.roleRepository.destroy({ where: { id: roleId } });
-        return { message: "Пользователь успешно удалён" };
+        return { message: "Роль успешно удалёна" };
       }
 }

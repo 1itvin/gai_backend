@@ -1,8 +1,7 @@
 import {BelongsTo, BelongsToMany, Column, DataType, ForeignKey, Model, Table, HasMany,} from "sequelize-typescript";
 import {ApiProperty} from "@nestjs/swagger";
-
-// import {Review} from "../reviews/reviews.model";
-// import {Record} from "../records/records.model";
+import {Record} from "../records/records.model";
+import {Review} from "../reviews/reviews.model";
 
 interface TourCreationAttrs {
     name: string;
@@ -38,9 +37,9 @@ export class Tour extends Model<Tour, TourCreationAttrs> {
     @Column({type: DataType.STRING})
     image: string;
 
-    // @HasMany(() => Review)
-    // reviews: Review[];
+    @HasMany(() => Review)
+    reviews: Review[];
 
-    // @HasMany(() => Record)
-    // records: Record[];
+    @HasMany(() => Record)
+    records: Record[];
 }
