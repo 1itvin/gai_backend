@@ -13,8 +13,8 @@ async function start() {
 
     
     const config = new DocumentBuilder()
-        .setTitle('ИС ГАИ')
-        .setDescription('Документация REST API в Swagger')
+        .setTitle('Туристическое Агентство | Traveler')
+        .setDescription('Документация в Swagger')
         .setVersion('1.0.0')
         .build()
     const document = SwaggerModule.createDocument(app, config);

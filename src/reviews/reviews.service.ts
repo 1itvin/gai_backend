@@ -52,6 +52,6 @@ export class ReviewService {
           );
         }
         await this.recordRepository.destroy({ where: { id: recordId } });
-        return { message: "Запись успешно удалён" };
+        return { message: "Запись успешно удалёна" };
       }
 }

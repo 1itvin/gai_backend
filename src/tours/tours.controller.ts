@@ -5,6 +5,7 @@ import {CreateTourDto} from "./dto/create-tour.dto";
 import {UpdateTourDto} from "./dto/update-tour.dto";
 import {ToursService} from "./tours.service";
 import {Tour} from "./tours.model";
+import {Roles} from "../auth/roles-auth.decorator";
 
 @ApiTags('Туры')
 @Controller('tours')
@@ -13,6 +14,7 @@ export class ToursController {
 
     @ApiOperation({ summary: 'Создать тур' })
     @ApiResponse({ status: 201, description: 'Тур успешно создан', type: Tour })
+    @Roles("MANAGER")
     @Post()
     @UseInterceptors(FileInterceptor('image'))
     async createTour(@Body() dto: CreateTourDto, @UploadedFile() image/*: Express.Multer.File*/) {
@@ -35,6 +37,7 @@ export class ToursController {
 
     @ApiOperation({ summary: 'Обновить тур' })
     @ApiResponse({ status: 200, description: 'Тур успешно обновлен', type: Tour })
+    @Roles("MANAGER")
     @Put(':id')
     async updateTour(@Param('id') id: number, @Body() updateDto: UpdateTourDto) {
         return this.toursService.updateTour(id, updateDto);
@@ -42,6 +45,7 @@ export class ToursController {
 
     @ApiOperation({ summary: 'Удалить тур' })
     @ApiResponse({ status: 200, description: 'Тур успешно удален' })
+    @Roles("MANAGER")
     @Delete(':id')
     async deleteTour(@Param('id') id: number) {
         return this.toursService.deleteTour(id);

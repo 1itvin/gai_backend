@@ -13,6 +13,8 @@ import { ToursModule } from './tours/tours.module';
 import {Tour} from "./tours/tours.model";
 import { RecordModule } from './records/records.module';
 import {Record} from "./records/records.model";
+import { UserInfoModule } from './userInfos/userInfos.module';
+import {UserInfo} from "./userInfos/userInfos.model";
 import { ReviewModule } from './reviews/reviews.module';
 import {Review} from "./reviews/reviews.model";
 import { FilesModule } from './files/files.module';
@@ -37,7 +39,7 @@ import * as path from 'path';
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRESS_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Role, UserRoles, Posts, Tour, Record, Review],
+            models: [User, UserInfo, Role, UserRoles, Tour, Record, Review, Posts],
             autoLoadModels: true,
 
             // dialect: 'postgres',
@@ -46,20 +48,21 @@ import * as path from 'path';
             // username: 'dav',
             // password: '1234',
             // database: 'travel_agency',
-            // models: [User, Role, UserRoles, Posts, Tour, Record, Review],
+            // models: [User, Role, UserRoles, Posts, Tour, Record, Review, UserInfo],
             // autoLoadModels: true
             
             synchronize: true,
             
         }),
         UsersModule,
+        UserInfoModule,
         RolesModule,
         AuthModule,
-        PostsModule,
         ToursModule,
         RecordModule,
         ReviewModule,
         FilesModule,
+        PostsModule,
     ]
 })
 export class AppModule {}
