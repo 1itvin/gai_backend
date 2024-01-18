@@ -2,7 +2,7 @@
 import {CreateReviewDto} from "./dto/create-reviews.dto";
 import {ReviewService} from "./reviews.service";
 // import {FileInterceptor} from "@nestjs/platform-express";
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {Review} from "./reviews.model";
 import {Body, Controller, Get, Param, Post, Query, Put, Delete} from '@nestjs/common';
 import { UpdateReviewDto } from "./dto/update-reviews.dto";
@@ -14,6 +14,7 @@ export class ReviewController {
 
     constructor(private recordService: ReviewService) {}
 
+    @ApiBearerAuth()
     @ApiOperation({summary: 'Создание отзыва'})
     @ApiResponse({status: 201, type: Review})
     @Roles("USER")
@@ -36,6 +37,7 @@ export class ReviewController {
         return this.recordService.getRecordByID(id);
     }
     
+    @ApiBearerAuth()
     @ApiOperation({ summary: "Обновление отзыва" })
     @ApiResponse({ status: 200, type: Review })
     @Roles("USER")
@@ -44,6 +46,7 @@ export class ReviewController {
         return this.recordService.updateRecord(reviewId, updateDto);
     }
 
+    @ApiBearerAuth()
     @ApiOperation({ summary: "Удаление отзыва" })
     @ApiResponse({ status: 200, description: `Отзыв успешно удалён` })
     @Roles("USER")

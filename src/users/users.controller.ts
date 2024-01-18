@@ -1,7 +1,7 @@
 import {Body, Controller, Get, Post, UseGuards, UsePipes, Delete, Put, Param, Query} from '@nestjs/common';
 import {CreateUserDto} from "./dto/create-user.dto";
 import {UsersService} from "./users.service";
-import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
+import {ApiBearerAuth, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {User} from "./users.model";
 import {JwtAuthGuard} from "../auth/jwt-auth.guard";
 import {Roles} from "../auth/roles-auth.decorator";
@@ -11,6 +11,7 @@ import {BanUserDto} from "./dto/ban-user.dto";
 import {ValidationPipe} from "../pipes/validation.pipe";
 import { UpdateUserDto } from "./dto/update-user.dto";
 
+@ApiBearerAuth()
 @ApiTags('Пользователи')
 @Controller('users')
 export class UsersController {

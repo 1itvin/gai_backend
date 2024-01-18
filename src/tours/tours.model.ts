@@ -8,7 +8,7 @@ interface TourCreationAttrs {
     description: string;
     price: number;
     priceVIP: number;
-    image: string;
+    // image: string;
 }
 
 @Table({ tableName: 'tours' })
@@ -33,9 +33,9 @@ export class Tour extends Model<Tour, TourCreationAttrs> {
   	@Column ({type :DataType.DECIMAL(10,2)})
   	priceVIP:number;
 
-    @ApiProperty({example:'tour1.png',description:'Картинка'})
-    @Column({type: DataType.STRING})
-    image: string;
+    // @ApiProperty({example:'tour1.png',description:'Картинка'})
+    // @Column({type: DataType.STRING})
+    // image: string;
 
     @HasMany(() => Review)
     reviews: Review[];

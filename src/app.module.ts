@@ -7,8 +7,8 @@ import { RolesModule } from './roles/roles.module';
 import {Role} from "./roles/roles.model";
 import {UserRoles} from "./roles/user-roles.model";
 import { AuthModule } from './auth/auth.module';
-import { PostsModule } from './posts/posts.module';
-import {Posts} from "./posts/posts.model";
+// import { PostsModule } from './posts/posts.module';
+// import {Posts} from "./posts/posts.model";
 import { ToursModule } from './tours/tours.module';
 import {Tour} from "./tours/tours.model";
 import { RecordModule } from './records/records.module';
@@ -39,7 +39,7 @@ import * as path from 'path';
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRESS_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, UserInfo, Role, UserRoles, Tour, Record, Review, Posts],
+        models: [User, UserInfo, Role, UserRoles, Tour, Record, Review/*, Posts*/],
             autoLoadModels: true,
 
             // dialect: 'postgres',
@@ -62,7 +62,7 @@ import * as path from 'path';
         RecordModule,
         ReviewModule,
         FilesModule,
-        PostsModule,
+        // PostsModule,
     ]
 })
 export class AppModule {}

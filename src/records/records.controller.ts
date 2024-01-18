@@ -2,7 +2,7 @@
 import {CreateRecordDto} from "./dto/create-record.dto";
 import {RecordService} from "./records.service";
 // import {FileInterceptor} from "@nestjs/platform-express";
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {Record} from "./records.model";
 import {Body, Controller, Get, Param, Post, Query, Put, Delete} from '@nestjs/common';
 import { UpdateRecordDto } from "./dto/update-record.dto";
@@ -14,6 +14,7 @@ export class RecordController {
 
     constructor(private recordService: RecordService) {}
 
+    @ApiBearerAuth()
     @ApiOperation({summary: 'Создание записи'})
     @ApiResponse({status: 201, type: Record})
     @Roles("USER")
@@ -36,6 +37,7 @@ export class RecordController {
         return this.recordService.getRecordByID(id);
     }
     
+    @ApiBearerAuth()
     @ApiOperation({ summary: "Обновление записи" })
     @ApiResponse({ status: 200, type: Record })
     @Roles("USER")
@@ -44,6 +46,7 @@ export class RecordController {
         return this.recordService.updateRecord(recordId, updateDto);
     }
 
+    @ApiBearerAuth()
     @ApiOperation({ summary: "Удаление записи" })
     @ApiResponse({ status: 200, description: `Запись успешно удалёна` })
     @Roles("USER")

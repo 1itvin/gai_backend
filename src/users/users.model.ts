@@ -2,8 +2,10 @@ import {BelongsToMany, Column, DataType, HasMany, HasOne, Model, Table} from "se
 import {ApiProperty} from "@nestjs/swagger";
 import {Role} from "../roles/roles.model";
 import {UserRoles} from "../roles/user-roles.model";
-import {Posts} from "../posts/posts.model";
+// import {Posts} from "../posts/posts.model";
 import { UserInfo } from "src/userInfos/userInfos.model";
+import {Record} from "../records/records.model";
+import {Review} from "../reviews/reviews.model";
 
 interface UserCreationAttrs {
     email: string;
@@ -35,9 +37,15 @@ export class User extends Model<User, UserCreationAttrs> {
     @BelongsToMany(() => Role, () => UserRoles)
     roles: Role[];
 
-    @HasMany(() => Posts)
-    posts: Posts[];
+    // @HasMany(() => Posts)
+    // posts: Posts[];
 
     @HasOne(() => UserInfo)
     userInfo: UserInfo;
+
+    @HasMany(() => Review)
+    reviews: Review[];
+
+    @HasMany(() => Record)
+    records: Record[];
 }
