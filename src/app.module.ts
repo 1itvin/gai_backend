@@ -1,5 +1,5 @@
-import {Module} from "@nestjs/common";
-import {SequelizeModule} from "@nestjs/sequelize";
+import {MiddlewareConsumer, Module, NestModule} from "@nestjs/common";
+import {SequelizeModule} from '@nestjs/sequelize';
 import { UsersModule } from './users/users.module';
 import {ConfigModule} from "@nestjs/config";
 import {User} from "./users/users.model";
@@ -7,8 +7,6 @@ import { RolesModule } from './roles/roles.module';
 import {Role} from "./roles/roles.model";
 import {UserRoles} from "./roles/user-roles.model";
 import { AuthModule } from './auth/auth.module';
-// import { PostsModule } from './posts/posts.module';
-// import {Posts} from "./posts/posts.model";
 import { ToursModule } from './tours/tours.module';
 import {Tour} from "./tours/tours.model";
 import { RecordModule } from './records/records.module';
@@ -20,6 +18,8 @@ import {Review} from "./reviews/reviews.model";
 import { FilesModule } from './files/files.module';
 import {ServeStaticModule} from "@nestjs/serve-static";
 import * as path from 'path';
+import { AppLoggerMiddleware } from "./middleware/httplogger.middleware";
+import { LoggerModule } from './logger/logger.module';
 
 @Module({
     controllers: [],
@@ -62,7 +62,12 @@ import * as path from 'path';
         RecordModule,
         ReviewModule,
         FilesModule,
+        LoggerModule,
         // PostsModule,
     ]
 })
-export class AppModule {}
+export class AppModule implements NestModule { 
+    configure(consumer: MiddlewareConsumer): void { 
+      consumer.apply(AppLoggerMiddleware).forRoutes('*'); 
+    } 
+  }

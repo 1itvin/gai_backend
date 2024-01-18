@@ -8,7 +8,6 @@ import {ValidationPipe} from "./pipes/validation.pipe";
 async function start() {
     
     const PORT = process.env.PORT || 5000;
-    console.log(process.env)
     const app = await NestFactory.create(AppModule)
 
     
