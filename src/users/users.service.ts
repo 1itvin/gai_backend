@@ -17,8 +17,12 @@ export class UsersService {
     async createUser(dto: CreateUserDto) {
         const user = await this.userRepository.create(dto);
         const role = await this.roleService.getRoleByValue("USER")
+        // const role = await this.roleService.getRoleByValue("ADMIN")
+        //!вот тут в первый раз надо создать сначала пользователя с ролью админ, а потом всегда только пользователь
         await user.$set('roles', [role.id])
         user.roles = [role]
+        const hashPassword = await bcrypt.hash(dto.password, 5);
+        user.update({ ...dto, password: hashPassword });
         return user;
     }
 
