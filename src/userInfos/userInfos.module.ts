@@ -12,4 +12,4 @@ import {UserInfo} from "./userInfos.model";
     SequelizeModule.forFeature([User, UserInfo])
   ]
 })
-export class UserInfoModule {}
+export class UserInfosModule {}

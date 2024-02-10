@@ -12,10 +12,10 @@ async function start() {
 
     
     const config = new DocumentBuilder()
-        .setTitle('Туристическое Агентство | Traveler')
+        .setTitle('ИС ГАИ')
         .setDescription('Документация в Swagger')
         .addBearerAuth()
-        .setVersion('1.0.0')
+        .setVersion('1.2.0')
         .build()
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('/api/docs', app, document)

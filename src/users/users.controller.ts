@@ -42,16 +42,6 @@ export class UsersController {
         return this.usersService.getUserByID(id);
     }
 
-    // @Get()
-    // getUserByEmail(@Query('email') email: string) {
-    //     return this.usersService.getUserByEmail(email);
-    // }
-
-    // @Get('/:email')
-    // getUserByEmail(@Param('email') email: string) {
-    //     return this.usersService.getUserByEmail(email);
-    // }
-
     @ApiOperation({summary: 'Выдать роль'})
     @ApiResponse({status: 200})
     @Roles("ADMIN")
@@ -100,5 +90,14 @@ export class UsersController {
     @Put("/:id")
     update(@Param("id") userId: number, @Body() updateDto: UpdateUserDto) {
         return this.usersService.updateUser(userId, updateDto);
+    }
+
+    @ApiOperation({ summary: 'Оплатить нарушение' })
+    @ApiResponse({ status: 200 })
+    @Roles('USER')
+    @UseGuards(RolesGuard)
+    @Put(':userId/violations/:violationId/pay')
+    payViolation(@Param('userId') userId: number, @Param('violationId') violationId: number) {
+    return this.usersService.payViolation(userId, violationId);
     }
 }

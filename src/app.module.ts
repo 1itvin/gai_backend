@@ -7,19 +7,21 @@ import { RolesModule } from './roles/roles.module';
 import {Role} from "./roles/roles.model";
 import {UserRoles} from "./roles/user-roles.model";
 import { AuthModule } from './auth/auth.module';
-import { ToursModule } from './tours/tours.module';
-import {Tour} from "./tours/tours.model";
-import { RecordModule } from './records/records.module';
-import {Record} from "./records/records.model";
-import { UserInfoModule } from './userInfos/userInfos.module';
+import {Rank} from "./ranks/ranks.model";
+import {Officer} from "./officers/officers.model";
+import { UserInfosModule } from './userInfos/userInfos.module';
 import {UserInfo} from "./userInfos/userInfos.model";
-import { ReviewModule } from './reviews/reviews.module';
-import {Review} from "./reviews/reviews.model";
 import { FilesModule } from './files/files.module';
 import {ServeStaticModule} from "@nestjs/serve-static";
 import * as path from 'path';
 import { AppLoggerMiddleware } from "./middleware/httplogger.middleware";
 import { LoggerModule } from './logger/logger.module';
+import { RanksModule } from "./ranks/ranks.module";
+import { OfficersModule } from "./officers/officers.module";
+import { CarsModule } from "./cars/cars.module";
+import { Car } from "./cars/cars.model";
+import { Violation } from "./violations/violations.model";
+import { ViolationsModule } from "./violations/violations.module";
 
 @Module({
     controllers: [],
@@ -39,31 +41,31 @@ import { LoggerModule } from './logger/logger.module';
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRESS_PASSWORD,
             database: process.env.POSTGRES_DB,
-        models: [User, UserInfo, Role, UserRoles, Tour, Record, Review/*, Posts*/],
+            models: [User, UserInfo, Role, UserRoles, Rank, Officer, Car, Violation],
             autoLoadModels: true,
 
-            // dialect: 'postgres',
-            // host: 'localhost',
-            // port: 5432,
-            // username: 'dav',
-            // password: '1234',
-            // database: 'travel_agency',
-            // models: [User, Role, UserRoles, Posts, Tour, Record, Review, UserInfo],
-            // autoLoadModels: true
+            // PORT=5000
+            // POSTGRES_HOST=localhost
+            // POSTGRES_USER=dav
+            // POSTGRES_DB=gai2
+            // POSTGRESS_PASSWORD=1234
+            // POSTGRESS_PORT=5432
+            // PRIVATE_KEY=secret_key_1111
             
             synchronize: true,
             
         }),
-        UsersModule,
-        UserInfoModule,
-        RolesModule,
         AuthModule,
-        ToursModule,
-        RecordModule,
-        ReviewModule,
+        UsersModule,
+        UserInfosModule,
+        RolesModule,
+        RanksModule,
+        OfficersModule,
+        CarsModule,
+        ViolationsModule,
+
         FilesModule,
         LoggerModule,
-        // PostsModule,
     ]
 })
 export class AppModule implements NestModule { 

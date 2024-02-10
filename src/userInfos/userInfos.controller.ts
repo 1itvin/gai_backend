@@ -1,4 +1,3 @@
-// import {Body, Controller, Post, UploadedFile, UseInterceptors} from '@nestjs/common';
 import {CreateUserInfoDto} from "./dto/create-userInfo.dto";
 import {UserInfoService} from "./userInfos.service";
 // import {FileInterceptor} from "@nestjs/platform-express";

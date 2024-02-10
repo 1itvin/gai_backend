@@ -2,13 +2,13 @@ import {BelongsToMany, Column, DataType, HasMany, HasOne, Model, Table} from "se
 import {ApiProperty} from "@nestjs/swagger";
 import {Role} from "../roles/roles.model";
 import {UserRoles} from "../roles/user-roles.model";
-// import {Posts} from "../posts/posts.model";
 import { UserInfo } from "src/userInfos/userInfos.model";
-import {Record} from "../records/records.model";
-import {Review} from "../reviews/reviews.model";
+import {Officer} from "../officers/officers.model";
+import {Car} from "../cars/cars.model";
+import { Violation } from "src/violations/violations.model";
 
 interface UserCreationAttrs {
-    email: string;
+    login: string;
     password: string;
 }
 
@@ -18,9 +18,9 @@ export class User extends Model<User, UserCreationAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number;
 
-    @ApiProperty({example: 'user@mail.ru', description: 'Почтовый адрес'})
+    @ApiProperty({example: 'user', description: 'Логин'})
     @Column({type: DataType.STRING, unique: true, allowNull: false})
-    email: string;
+    login: string;
     
     @ApiProperty({example: '12345678', description: 'Пароль'})
     @Column({type: DataType.STRING, allowNull: false})
@@ -37,15 +37,16 @@ export class User extends Model<User, UserCreationAttrs> {
     @BelongsToMany(() => Role, () => UserRoles)
     roles: Role[];
 
-    // @HasMany(() => Posts)
-    // posts: Posts[];
-
     @HasOne(() => UserInfo)
     userInfo: UserInfo;
 
-    @HasMany(() => Review)
-    reviews: Review[];
+    @HasMany(() => Car)
+    cars: Car[];
 
-    @HasMany(() => Record)
-    records: Record[];
+    @HasMany(() => Violation)
+    violations: Violation[];
+
+    @HasOne(() => Officer)
+    officer: Officer;
+
 }
